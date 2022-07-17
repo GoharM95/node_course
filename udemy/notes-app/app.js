@@ -59,32 +59,32 @@ yargs.version("1.1.0");
 // });
 
 // Create list command
-yargs.command({
-  command: "list",
-  describe: "List all notes",
-  handler: function () {
-    console.log("Listing out all notes!");
-  },
-});
+// yargs.command({
+//   command: "list",
+//   describe: "List all notes",
+//   handler: function () {
+//     console.log("Listing out all notes!");
+//   },
+// });
 
 // Create read command
-yargs.command({
-  command: "read",
-  describe: "Read a note",
-  builder: {
-    title: {
-      describe: "Note title",
-      // to make title required [node app.js read --title="Shopping list"]
-      // by default is false
-      demandOption: true,
-      type: "string",
-    },
-  },
-  handler: function (argv) {
-    console.log(`Title: ${argv.title}`);
-    console.log("Reading a note!", argv);
-  },
-});
+// yargs.command({
+//   command: "read",
+//   describe: "Read a note",
+//   builder: {
+//     title: {
+//       describe: "Note title",
+//       // to make title required [node app.js read --title="Shopping list"]
+//       // by default is false
+//       demandOption: true,
+//       type: "string",
+//     },
+//   },
+//   handler: function (argv) {
+//     console.log(`Title: ${argv.title}`);
+//     console.log("Reading a note!", argv);
+//   },
+// });
 
 // instead of console.log(yargs.argv) we can do
 yargs.parse();
@@ -122,14 +122,32 @@ yargs.command({
       demandOption: true,
       type: "string",
     },
-    // body: {
-    //   describe: "Note body",
-    //   demandOption: true,
-    //   type: "string",
-    // },
   },
   handler(argv) {
     notes.removeNote(argv.title);
+  },
+});
+
+yargs.command({
+  command: "list",
+  describe: "List all notes",
+  handler() {
+    notes.listNotes();
+  },
+});
+
+yargs.command({
+  command: "read",
+  describe: "Read a note",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler(argv) {
+    notes.readNote(argv.title);
   },
 });
 
