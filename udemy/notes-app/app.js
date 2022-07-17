@@ -24,7 +24,7 @@
 // }
 
 /////////////////////////////////////
-const { title } = require("process");
+const { title, argv } = require("process");
 const yargs = require("yargs");
 
 console.log(process.argv);
@@ -33,30 +33,30 @@ console.log(process.argv);
 yargs.version("1.1.0");
 
 // Create add command
-yargs.command({
-  command: "add",
-  describe: "Add a new note",
-  handler: function () {
-    console.log("Adding a new note!");
-  },
-});
+// yargs.command({
+//   command: "add",
+//   describe: "Add a new note",
+//   handler: function () {
+//     console.log("Adding a new note!");
+//   },
+// });
 
 // Create remove command
-yargs.command({
-  command: "remove",
-  describe: "Remove a new note",
-  builder: {
-    body: {
-      describe: "Note body",
-      demandOption: true,
-      type: "string",
-    },
-  },
-  handler: function (argv) {
-    console.log(`Body: ${argv.body}`);
-    console.log("Removing a note!");
-  },
-});
+// yargs.command({
+//   command: "remove",
+//   describe: "Remove a new note",
+//   builder: {
+//     body: {
+//       describe: "Note body",
+//       demandOption: true,
+//       type: "string",
+//     },
+//   },
+//   handler: function (argv) {
+//     console.log(`Body: ${argv.body}`);
+//     console.log("Removing a note!");
+//   },
+// });
 
 // Create list command
 yargs.command({
@@ -87,4 +87,50 @@ yargs.command({
 });
 
 // instead of console.log(yargs.argv) we can do
+yargs.parse();
+
+// JSON
+const notes = require("./notes.js");
+
+yargs.command({
+  command: "add",
+  describe: "Add a new note",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+    body: {
+      describe: "Note body",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  handler: function (argv) {
+    console.log("argv", argv);
+    notes.addNote(argv.title, argv.body);
+  },
+});
+
+yargs.command({
+  command: "remove",
+  describe: "Remove a new note",
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string",
+    },
+    // body: {
+    //   describe: "Note body",
+    //   demandOption: true,
+    //   type: "string",
+    // },
+  },
+  handler: function (argv) {
+    notes.removeNote(argv.title);
+  },
+});
+
 yargs.parse();
