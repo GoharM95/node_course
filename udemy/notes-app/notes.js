@@ -23,6 +23,8 @@ const removeNote = (title) => {
 const addNote = (title, body) => {
   const notes = loadNotes();
 
+  // debugger;
+
   // const duplicateNotes = notes.filter((note) => {
   //   return note.title === title;
   // });
