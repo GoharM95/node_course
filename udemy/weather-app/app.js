@@ -47,3 +47,17 @@ request({ url: geocodeURL, json: true }, (err, res) => {
     console.log(latitude, longitude);
   }
 });
+
+// combined requests
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
+
+geocode("nk", (err, data) => {
+  console.log("err", err);
+  console.log("res", res);
+});
+
+forecast(-75.7088, 44.1545, (err, res) => {
+  console.log("err", err);
+  console.log("res", res);
+});
