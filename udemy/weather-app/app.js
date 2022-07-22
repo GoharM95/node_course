@@ -68,32 +68,21 @@ const address = process.argv[2];
 if (!address) {
   console.log("Please provide an address");
 } else {
-<<<<<<< HEAD
   // geocode(address, (err, data) => {
   geocode(address, (err, { latitude, longitude, location } = {}) => {
     // we cn't destructure from undefined(data), so we must write {} as a default value
-=======
-  geocode(address, (err, data) => {
->>>>>>> df7824aedfa007a2fe27bb6e71376c81ae8c495c
+
     if (err) {
       return console.log(err);
     }
 
-<<<<<<< HEAD
     forecast(latitude, longitude, (err, forecastData) => {
-=======
-    forecast(40.069099, 45.038189, (err, forecastData) => {
->>>>>>> df7824aedfa007a2fe27bb6e71376c81ae8c495c
       if (err) {
         return console.log(err);
       }
 
-<<<<<<< HEAD
       // console.log(data.location);
       console.log(location);
-=======
-      console.log(data.location);
->>>>>>> df7824aedfa007a2fe27bb6e71376c81ae8c495c
       console.log(forecastData);
     });
   });
