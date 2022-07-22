@@ -44,7 +44,7 @@ request({ url: geocodeURL, json: true }, (err, res) => {
   } else {
     const latitude = res.body.features[0].center[0];
     const longitude = res.body.features[0].center[1];
-    console.log(latitude, longitude);
+    // console.log(latitude, longitude);
   }
 });
 
@@ -52,12 +52,34 @@ request({ url: geocodeURL, json: true }, (err, res) => {
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
-geocode("nk", (err, data) => {
-  console.log("err", err);
-  console.log("res", res);
-});
+// geocode("georgia", (err, data) => {
+//   console.log("err", err);
+//   console.log("data", data);
+// });
 
-forecast(-75.7088, 44.1545, (err, res) => {
-  console.log("err", err);
-  console.log("res", res);
-});
+// forecast(40.069099, 45.038189, (err, data) => {
+//   console.log("err", err);
+//   console.log("data", data);
+// });
+
+// callback chaining
+const address = process.argv[2];
+
+if (!address) {
+  console.log("Please provide an address");
+} else {
+  geocode(address, (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    forecast(40.069099, 45.038189, (err, forecastData) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      console.log(data.location);
+      console.log(forecastData);
+    });
+  });
+}
