@@ -71,6 +71,7 @@ if (!address) {
   // geocode(address, (err, data) => {
   geocode(address, (err, { latitude, longitude, location } = {}) => {
     // we cn't destructure from undefined(data), so we must write {} as a default value
+
     if (err) {
       return console.log(err);
     }
