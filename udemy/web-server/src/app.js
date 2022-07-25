@@ -107,15 +107,15 @@ app3.get("/help", (req, res) => {
 });
 
 app3.get("/weather", (req, res) => {
-  const { address, latitude, longitude } = req.query;
-  console.log("req", req.query);
+  const { address } = req.query;
+
   if (!address) {
     res.send({
       error: "you must provide an address",
     });
   }
 
-  geocode(address, (err, { latitude, longitude, location }) => {
+  geocode(address, (err, { latitude, longitude, location } = {}) => {
     if (err) {
       return res.send({ err });
     }
