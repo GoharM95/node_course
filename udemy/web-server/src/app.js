@@ -104,6 +104,15 @@ app3.get("/help", (req, res) => {
   });
 });
 
+// if I don't have the path for example http://localhost:3000/me
+app3.get("*", (req, res) => {
+  res.render("404", { errorMessage: "page not found" });
+});
+
+app3.get("/help/*", (req, res) => {
+  res.render("404", { errorMessage: "article not found" });
+});
+
 app3.listen(3000, () => {
   console.log("Server is up on port 3000");
 });
