@@ -104,6 +104,32 @@ app3.get("/help", (req, res) => {
   });
 });
 
+app3.get("/weather", (req, res) => {
+  console.log("req", req.query);
+  if (!req.query.address) {
+    res.send({
+      error: "you must provide an address",
+    });
+  }
+
+  res.send({
+    forecast: "It's sunny",
+    location: "Armenia",
+    address: req.query.address,
+  });
+});
+
+// add searchterm to the link = "http://localhost:3000/products?search=games"
+app3.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: "you must provide a search term",
+    });
+  }
+
+  res.send({ products: [] });
+});
+
 // if I don't have the path for example http://localhost:3000/me
 app3.get("*", (req, res) => {
   res.render("404", { errorMessage: "page not found" });
