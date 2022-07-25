@@ -1,6 +1,6 @@
 const express = require("express");
 
-const app = express();
+// const app = express();
 
 // 1
 // app.get("", (req, res) => {
@@ -65,10 +65,35 @@ const path = require("path");
 
 const app3 = express();
 const publicDirectoryPath = path.join(__dirname, "../public");
-console.log("__dirname", __dirname);
+console.log("publicDirectoryPath", publicDirectoryPath);
+
+// run from web-server - "web-server % node src/app.js"
+app3.set("view engine", "hbs");
 
 app3.use(express.static(publicDirectoryPath));
+
+app3.get("", (req, res) => {
+  res.render("index", {
+    title: "Weather App",
+    name: "Gohar",
+  });
+});
+
+app3.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About",
+    name: "Henry",
+  });
+});
+
+app3.get("/help", (req, res) => {
+  res.render("help", {
+    message: "I'm here to help you",
+  });
+});
 
 app3.listen(3000, () => {
   console.log("Server is up on port 3000");
 });
+
+// 5
