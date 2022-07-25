@@ -1,4 +1,5 @@
 const express = require("express");
+const hbs = require("hbs");
 
 // const app = express();
 
@@ -64,12 +65,21 @@ const express = require("express");
 const path = require("path");
 
 const app3 = express();
-const publicDirectoryPath = path.join(__dirname, "../public");
-console.log("publicDirectoryPath", publicDirectoryPath);
 
+// Define paths for express config
+const publicDirectoryPath = path.join(__dirname, "../public");
+// customizing default views directory name(templates)
+const viewsPath = path.join(__dirname, "../templates/views");
+const partialsPath = path.join(__dirname, "../templates/partials");
+
+// Setup handlebars engine and views location
 // run from web-server - "web-server % node src/app.js"
 app3.set("view engine", "hbs");
+app3.set("views", viewsPath);
+// partials are used for reusable pieces like header, footer...
+hbs.registerPartials(partialsPath);
 
+// Setup static directory to serve
 app3.use(express.static(publicDirectoryPath));
 
 app3.get("", (req, res) => {
@@ -88,6 +98,8 @@ app3.get("/about", (req, res) => {
 
 app3.get("/help", (req, res) => {
   res.render("help", {
+    title: "Help",
+    name: "Gohar",
     message: "I'm here to help you",
   });
 });
@@ -95,5 +107,3 @@ app3.get("/help", (req, res) => {
 app3.listen(3000, () => {
   console.log("Server is up on port 3000");
 });
-
-// 5
