@@ -1,0 +1,11 @@
+{{! as a standard nodemon is rerunning only when we change something in app.js, 
+not taking into an account hbs files add -e(for extensions) this issue to be fixed,
+ node src/app.js -e js, hbs
+ }}
+
+<header>
+  <h1>{{title}}</h1>
+  <a href="/">Weather</a>
+  <a href="/about">About</a>
+  <a href="/help">Help</a>
+</header>
