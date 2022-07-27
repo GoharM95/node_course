@@ -3,6 +3,8 @@ const hbs = require("hbs");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
+const port = process.env.PORT || 3000;
+
 // const app = express();
 
 // 1
@@ -154,6 +156,11 @@ app3.get("/help/*", (req, res) => {
   res.render("404", { errorMessage: "article not found" });
 });
 
-app3.listen(3000, () => {
-  console.log("Server is up on port 3000");
+// app3.listen(3000, () => {
+//   console.log("Server is up on port 3000");
+// });
+
+// heroku deployment
+app3.listen(port, () => {
+  console.log(`Server is up on port 3000${port}`);
 });
